@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Treatments</h1>
+    <a href="/treatments/new/" class="btn btn-primary mb-2">Create New Treatment</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>User ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for treatment in treatments %}
+            <tr>
+                <td>{{ treatment.name }}</td>
+                <td>{{ treatment.description }}</td>
+                <td>{{ treatment.user_id }}</td>
+                <td>
+                    <a href="/treatments/{{ treatment.id }}/edit/" class="btn btn-secondary btn-sm">Edit</a>
+                    <form action="/treatments/{{ treatment.id }}/delete/" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

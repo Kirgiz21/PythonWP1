@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form action="{{ action }}" method="post">
+        {% for field in fields %}
+            <div class="form-group">
+                <label for="{{ field.name }}">{{ field.label }}</label>
+                {% if field.type == 'select' %}
+                    <select class="form-control" name="{{ field.name }}">
+                        {% for option in field.options %}
+                            <option value="{{ option.value }}" {% if option.selected %}selected{% endif %}>{{ option.label }}</option>
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <input type="{{ field.type }}" class="form-control" name="{{ field.name }}" value="{{ field.value }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <a href="/" class="btn btn-secondary mt-2">Back to Home</a>
+{% endblock %}
+
+
